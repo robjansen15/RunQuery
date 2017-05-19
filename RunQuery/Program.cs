@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace RunQuery
 {
@@ -10,6 +8,30 @@ namespace RunQuery
     {
         static void Main(string[] args)
         {
+            DatabaseConnection connection = new DatabaseConnection();
+
+            try
+            {
+                connection.Connect();
+
+                SqlCommand command = new SqlCommand();
+
+                command.CommandType = CommandType.Text;
+                command.CommandText = "Query Here";
+
+
+                command.ExecuteNonQuery();
+
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+                connection.Disconnect();
+            }
+
         }
     }
 }
